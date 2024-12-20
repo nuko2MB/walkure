@@ -40,7 +40,7 @@ shell-fsh +PKGS:
 [no-cd]
 shell +PKGS:
     #!/usr/bin/env nu
-    let args = [ {{ PKGS }} ] | each { |s| nixpkgs#($s) }
+    let args = [ {{ PKGS }} ] | each { |s| $"nixpkgs#($s)" }
     nix shell ...$args
 
 [no-cd]
