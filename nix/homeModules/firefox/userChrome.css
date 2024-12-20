@@ -1,0 +1,11 @@
+@-moz-document url(chrome://browser/content/browser.xhtml)
+{
+  #sidebar-header,
+  #sidebar-button {
+    display: none;
+  }
+
+  #TabsToolbar {
+    display: none !important;
+  }
+}

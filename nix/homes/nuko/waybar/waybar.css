@@ -1,0 +1,28 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Ubuntu;
+}
+
+#waybar {
+  background-color: rgba(74, 177, 237, 0.719);
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+}
+
+#clock {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+#workspaces button {
+  color: white;
+  border: 1px solid;
+  border-color: white;
+}
+
+#idle_inhibitor {
+  margin-left: 10px;
+  margin-right: 5px;
+}

@@ -1,0 +1,26 @@
+@-moz-document regexp("^moz-extension://.*?/sidebar/sidebar.html")
+{
+  #root.root {
+    --tabs-height: 38px !important;
+    --tabs-activated-bg: rgba(150, 90, 253, 0.5) !important;
+    --tabs-margin: 3px !important;
+    --tabs-indent: 12px !important;
+    --tabs-font: 0.97rem sans-serif !important;
+
+    --tabs-pinned-height: 38px !important;
+    --tabs-pinned-width: 38px !important;
+
+    --ctx-menu-min-width: 205px !important;
+    --ctx-menu-max-width: 240px !important;
+    --ctx-menu-font: 0.97rem sans-serif !important;
+    --ctx-menu-padding: 4px !important;
+    --ctx-menu-opt-padding: 5px !important;
+    --ctx-menu-icon-opt-height: 36px !important;
+    --ctx-menu-text-opt-height: 30px !important;
+
+    --search-height: 36px !important;
+
+    --nav-btn-height: 36px !important;
+    --nav-btn-width: 36px !important;
+  }
+}

@@ -1,0 +1,206 @@
+input {
+    mouse {
+        accel-profile "flat"
+        accel-speed -0.25
+    }
+}
+
+output "DP-4" {
+    mode "1920x1080@119.982"
+    position x=0 y=100
+    variable-refresh-rate
+}
+
+output "DP-3" {
+    mode "2560x1440@170.017"
+    position x=1920 y=0
+    variable-refresh-rate
+    scale 1
+}
+
+
+// Settings that influence how windows are positioned and sized.
+// Find more information on the wiki:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
+layout {
+    gaps 16
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        // off
+        width 4
+        active-color "#7fc8ff"
+        inactive-color "#505050"
+    }
+
+    border {
+        off
+        width 4
+        active-color "#ffc87f"
+        inactive-color "#505050"
+    }
+
+    struts {
+        left 10
+        right 10
+        // top 64
+        // bottom 64
+    }
+}
+spawn-at-startup "xwayland-satellite" "-a" "0"
+// Should be started by systemd...But nix doesnt like to.
+spawn-at-startup "systemctl" "restart" "--user" "hyprpaper" 
+
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+environment {
+    DISPLAY ":0";
+};
+
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
+animations {
+
+}
+
+prefer-no-csd
+
+window-rule {
+    geometry-corner-radius 8
+    clip-to-geometry true
+}
+
+ window-rule {
+    exclude app-id="mpv"
+    exclude app-id="stremio"
+    // opacity 0.88
+   // draw-border-with-background false
+}
+
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
+
+workspace "Primary" {
+    open-on-output "DP-3"
+}
+workspace "Secondary" {
+    open-on-output "DP-4"
+}
+workspace "Games" {
+    open-on-output "DP-3"
+}
+workspace "Four" {
+    open-on-output "DP-4"
+}
+workspace "Five" {
+    open-on-output "DP-3"
+}
+workspace "Six" {
+    open-on-output "DP-4"
+}
+
+
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    Mod+RETURN { spawn "footclient"; }
+    Mod+D { spawn "fuzzel"; }
+    Mod+Q { close-window; }
+    Mod+Shift+O {spawn "swaync-client" "-t" "-sw";}
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "lower"; }
+    XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
+
+    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Down  { focus-window-or-workspace-down; }
+    Mod+Up    { focus-window-or-workspace-up; }
+
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
+    Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
+
+    Mod+Ctrl+Left  { focus-monitor-left; }
+    Mod+Ctrl+Down  { focus-monitor-down; }
+    Mod+Ctrl+Up    { focus-monitor-up; }
+    Mod+Ctrl+Right { focus-monitor-right; }
+
+    Mod+WheelScrollDown             { focus-column-right; }
+    Mod+WheelScrollUp               { focus-column-left; }
+    Mod+Ctrl+WheelScrollDown            { focus-workspace-down; } // cooldown-ms=150 
+    Mod+Ctrl+WheelScrollUp         { focus-workspace-up; }
+
+    Mod+Shift+WheelScrollDown      { move-column-right; }
+    Mod+Shift+WheelScrollUp        { move-column-left; }
+    Mod+Ctrl+Shift+WheelScrollDown { move-column-to-workspace-down; }
+    Mod+Ctrl+Shift+WheelScrollUp   { move-column-to-workspace-up; }
+
+    Mod+1 { focus-workspace "Primary"; }
+    Mod+2 { focus-workspace "Secondary"; }
+    Mod+3 { focus-workspace "Games"; }
+    Mod+4 { focus-workspace "Four"; }
+    Mod+5 { focus-workspace "Five"; }
+    Mod+6 { focus-workspace "Six"; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+Shift+1 { move-column-to-workspace "Primary"; }
+    Mod+Shift+2 { move-column-to-workspace "Secondary"; }
+    Mod+Shift+3 { move-column-to-workspace "Games"; }
+    Mod+Shift+4 { move-column-to-workspace "Four"; }
+    Mod+Shift+5 { move-column-to-workspace "Five"; }
+    Mod+Shift+6 { move-column-to-workspace "Six"; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+
+    Mod+Tab { focus-workspace-previous; }
+    Mod+Comma  { consume-window-into-column; }
+    Mod+Period { expel-window-from-column; }
+
+    Mod+R { switch-preset-column-width; }
+    Mod+Shift+R { reset-window-height; }
+    Mod+F { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+C { center-column; }
+
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    Mod+Ctrl+F12 { screenshot; }
+    Mod+F12 { screenshot-screen; }
+    Mod+Shift+F12 { screenshot-window; }
+
+    Mod+Shift+Backspace { spawn "wlogout"; }
+    Mod+Shift+P { power-off-monitors; }
+}
+
+debug {   
+    disable-cursor-plane
+    //review-render "screencast"
+    // preview-render "screen-capture"
+    // enable-overlay-planes
+    // disable-direct-scanout
+    // render-drm-device "/dev/dri/renderD129"
+    // dbus-interfaces-in-non-session-instances
+    // wait-for-frame-completion-before-queueing
+    // emulate-zero-presentation-time
+    // enable-color-transformations-capability
+}
