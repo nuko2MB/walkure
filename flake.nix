@@ -60,6 +60,10 @@
     };
 
     niri.url = "github:sodiboo/niri-flake";
+    xwayland-satellite = {
+      url = "github:Supreeeme/xwayland-satellite";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     preservation.url = "github:WilliButz/preservation";
   };

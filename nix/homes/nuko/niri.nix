@@ -1,12 +1,23 @@
 {
   config,
   pkgs,
+  inputs',
   ...
 }:
 {
   imports = [ ./waybar/waybar.nix ];
 
-  # TODO: Make service for xwayland-satellite
+  walkure = {
+    xwayland-satellite = {
+      enable = true;
+
+      # Using latest git version for a bug fix.
+      # TODO: Switch to niri flake when it gets updated. For binary cache.
+      package = inputs'.xwayland-satellite.packages.xwayland-satellite;
+      # package = inputs'.niri.packages.xwayland-satellite-unstable;
+    };
+  };
+
   home.packages = [
     pkgs.xwayland-satellite
   ];

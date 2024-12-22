@@ -52,7 +52,6 @@ layout {
         // bottom 64
     }
 }
-spawn-at-startup "xwayland-satellite" "-a" "0"
 // Should be started by systemd...But nix doesnt like to.
 spawn-at-startup "systemctl" "restart" "--user" "hyprpaper" 
 
