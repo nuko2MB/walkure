@@ -52,8 +52,8 @@ layout {
         // bottom 64
     }
 }
-// Should be started by systemd...But nix doesnt like to.
-spawn-at-startup "systemctl" "restart" "--user" "hyprpaper" 
+
+// spawn-at-startup "cosmic-ext-alternative-startup"
 
 window-rule {
     geometry-corner-radius 12

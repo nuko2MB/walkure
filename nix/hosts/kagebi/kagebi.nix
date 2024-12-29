@@ -18,7 +18,6 @@
     ./caddy.nix
     ./vikunja.nix
     ./adguard.nix
-
     # ./lact.nix
   ];
 
@@ -26,6 +25,8 @@
   walkure.user.hashedPasswordFile = config.age.secrets.kagebi-pw.path;
 
   walkure = {
+    cosmic-niri.enable = false;
+
     fileSystem.btrfs = {
       enable = true;
       device = "/dev/disk/by-id/nvme-WD_BLACK_SN850X_2000GB_232859801809";
@@ -53,6 +54,8 @@
       };
     */
   };
+
+  services.desktopManager.cosmic.enable = true;
 
   age.rekey = {
     hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDYN6PEtmqPcLFobhKsv3nkdGLonysu2eJWCrJjlLSAK root@kagebi";
