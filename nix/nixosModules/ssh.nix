@@ -43,7 +43,6 @@
     {
       programs.ssh = {
         enable = true;
-        # addKeysToAgent = "yes"; # No work
       };
     }
   ];

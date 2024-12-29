@@ -5,7 +5,13 @@
   ...
 }:
 let
-inherit (lib) mkEnableOption mkPackageOption mkOption types mkIf;
+  inherit (lib)
+    mkEnableOption
+    mkPackageOption
+    mkOption
+    types
+    mkIf
+    ;
   cfg = config.walkure.xwayland-satellite;
 in
 {
@@ -17,7 +23,7 @@ in
       default = "niri.service";
     };
   };
-  
+
   config = mkIf cfg.enable {
     systemd.user.services.xwayland-satellite = {
       Unit = {
