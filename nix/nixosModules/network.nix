@@ -55,11 +55,17 @@ in
         };
       };
       wait-online = {
+        anyInterface = true;
         enable = false;
         timeout = 0;
       };
     };
+
+    # Force disable stubborn nm wait-online.
+    systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
+
     networking = {
+      networkmanager.enable = false;
       useNetworkd = true;
       useDHCP = false;
       hostName = hostname;
