@@ -12,6 +12,11 @@
   ];
 
   walkure = {
+    mpv = {
+      enable = true;
+      vulkanVideo = true;
+      dmabuf-wayland = false;
+    };
     firefox.enable = true;
   };
 
@@ -111,25 +116,6 @@
       };
 
       languages = { };
-    };
-
-    # FIXME: mpv does not start with vulkan.
-    # Works when using opengl or dmabuf-wayland
-    mpv = {
-      enable = true;
-      scripts = with pkgs.mpvScripts; [
-        thumbfast
-        modernz
-        autoload
-        mpris
-      ];
-      config = {
-        hwdec = "auto-safe";
-        gpu-context = "wayland";
-        vo = "gpu-next";
-        profile = "high-quality";
-        gpu-api = "vulkan";
-      };
     };
 
     # Git
