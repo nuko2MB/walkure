@@ -58,7 +58,7 @@
         jdk21
       ];
     })
-    bottles
+   # bottles
     heroic
     xivlauncher
     wineWow64Packages.stagingFull
