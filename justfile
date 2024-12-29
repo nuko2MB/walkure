@@ -1,5 +1,8 @@
 default: build
 
+nix := "nix --extra-experimental-features \"nix-command flakes\""
+flake := ".?submodules=1"
+
 gaa:
     @git add --all
     git submodule foreach 'git add --all'
@@ -17,25 +20,10 @@ boot *FLAGS: gaa
     nh os boot {{ flake }} {{ FLAGS }}
 
 bootloader *FLAGS: gaa
-    sudo nixos-rebuild boot --flake . --install-bootloader
-
-run-fsh pkg *FLAGS:
-    #!/usr/bin/env fish
-    set pkg (string join "#" "nixpkgs" {{ pkg }})
-    nix run $pkg -- {{ FLAGS }}
+    sudo nixos-rebuild boot --flake {{ flake }} --install-bootloader
 
 run pkg *FLAGS:
-    #!/usr/bin/env nu
     nix run "nixpkgs#{{ pkg }}" -- {{ FLAGS }}
-
-[no-cd]
-shell-fsh +PKGS:
-    #!/usr/bin/env fish
-    set pkgs {{ PKGS }}
-    for i in (seq (count $pkgs))
-        set pkgs[$i] (string join "#" "nixpkgs" $pkgs[$i])
-    end
-    nix shell $pkgs
 
 [no-cd]
 shell +PKGS:
@@ -46,9 +34,6 @@ shell +PKGS:
 [no-cd]
 repl:
     nix repl --expr 'import<nixpkgs>{}'
-
-nix := "nix --extra-experimental-features \"nix-command flakes\""
-flake := ".?submodules=1"
 
 [no-cd]
 nix *args:
@@ -64,7 +49,7 @@ install hostname:
         exit
     fi
     sudo {{ nix }} run 'github:nix-community/disko/latest' -- -f .#{{ hostname }} -m disko
-    sudo nixos-install --no-root-passwd --flake .#{{ hostname }} 
+    sudo nixos-install --no-root-passwd --flake {{ flake }}#{{ hostname }}
 
 nix-update package *FLAGS='--version=branch=main':
     #!/usr/bin/env bash
