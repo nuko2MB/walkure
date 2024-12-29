@@ -15,7 +15,7 @@
   services.caddy = {
     package = pkgs.caddy.withPlugins {
       plugins = [ "github.com/caddy-dns/porkbun@v0.2.1" ];
-      hash = "sha256-/zfrMl5PyBDjyQcumlUKHULjf74S5K0KHmX80/ZxeU0=";
+      hash = "sha256-oizWuPXI0M9ngBCt/iEXWt+/33wpKlCs1yBPKnzFhRY=";
     };
 
     enable = true;
