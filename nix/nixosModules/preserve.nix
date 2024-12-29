@@ -46,6 +46,8 @@
         # Direnv
         ".local/share/direnv"
 
+        ".local/share/zoxide/"
+
         # User Folders
         "Downloads"
         "Documents"
